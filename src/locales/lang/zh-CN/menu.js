@@ -52,4 +52,7 @@ export default {
   'menu.example.foo': '表格',
   'menu.example.bar': '表单',
   'menu.example.test': '测试',
+  // 主页
+  'menu.host': '主页',
+  'menu.host.hostPage': '主页面',
 }

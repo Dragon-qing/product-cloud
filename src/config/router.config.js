@@ -1,5 +1,6 @@
 // eslint-disable-next-line
 import { UserLayout, BasicLayout, BlankLayout } from '@/layouts'
+// import { PageView } from '@/layouts/index'
 // import { bxAnaalyse } from '@/core/icons'
 
 const RouteView = {
@@ -43,6 +44,22 @@ export const asyncRouterMap = [
           },
         ],
       },
+      // // host
+      // {
+      //   path: '/host',
+      //   name: 'host',
+      //   component: RouteView,
+      //   redirect: '/host/hostPage',
+      //   meta: { title: 'menu.host', keepAlive: true, icon: 'table', permission: [ 'dashboard' ] },
+      //   children: [
+      //     {
+      //       path: '/host/hostPage',
+      //       name: 'host.hostPage',
+      //       meta: { title: 'menu.host.hostPage', keepAlive: true, permission: [ 'dashboard' ] },
+      //       component: () => import('@/views/host/HostPage'),
+      //     },
+      //   ],
+      // },
       // hoc demo
       {
         path: '/hoc',
@@ -248,17 +265,17 @@ export const constantRouterMap = [
       {
         path: 'login',
         name: 'login',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Login'),
+        component: () => import('@/views/user/Login'),
       },
       {
         path: 'register',
         name: 'register',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/Register'),
+        component: () => import('@/views/user/Register'),
       },
       {
         path: 'register-result',
         name: 'registerResult',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/user/RegisterResult'),
+        component: () => import('@/views/user/RegisterResult'),
       },
       {
         path: 'recover',
@@ -267,18 +284,20 @@ export const constantRouterMap = [
       },
     ],
   },
-  // {
-  //   path: '/index1',
-  //   name: 'index1',
-  //   component: 'PageView',
-  //   children: [
-  //     {
-  //       path: 'register-result',
-  //       name: 'registerResult',
-  //       component: () => import(/* webpackChunkName: "user" */ '@/views/user/RegisterResult'),
-  //     },
-  //   ],
-  // },
+  // host
+  {
+    path: '/host',
+    name: 'host',
+    component: BlankLayout,
+    redirect: '/host/hostPage',
+    children: [
+      {
+        path: '/host/hostPage',
+        name: 'host.hostPage',
+        component: () => import('@/views/host/HostPage'),
+      },
+    ],
+  },
   {
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
