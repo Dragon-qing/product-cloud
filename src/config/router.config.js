@@ -492,4 +492,17 @@ export const constantRouterMap = [
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
   },
+
+  {
+    path: '/personal',
+    name: 'personal',
+    component: BlankLayout,
+    children: [
+      {
+        path: '/personal/index',
+        name: 'index',
+        component: () => import('@/views/personal/index'),
+      },
+    ],
+  },
 ]
