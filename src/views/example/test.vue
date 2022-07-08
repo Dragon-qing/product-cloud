@@ -50,7 +50,7 @@
 import { getTest } from '@/services/xhr/demo'
 const columns = [
   {
-    name: 'Name',
+    title: 'Name',
     dataIndex: 'name',
     key: 'name',
   },
@@ -58,6 +58,11 @@ const columns = [
     title: 'Age',
     dataIndex: 'age',
     key: 'age',
+  },
+  {
+    title: 'Sex',
+    dataIndex: 'sex',
+    key: 'sex',
   },
 ]
 
@@ -68,10 +73,12 @@ export default {
       data: [],
     }
   },
- async created() {
+  async created() {
     // 嵌套式的结构语法
-    const result = await getTest()
-    this.data = result.data.list
+    const {
+      result: { data },
+    } = await getTest()
+    this.data = data
   },
 }
 </script>

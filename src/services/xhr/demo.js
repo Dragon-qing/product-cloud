@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 const api = {
   list: '/demo/list',
-  testlist: '/demo/test',
+  testlist: '/test/list',
   create: '/demo/create',
 }
 
