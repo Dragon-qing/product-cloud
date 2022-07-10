@@ -10,7 +10,7 @@
           v-model="seValue"
           placeholder="搜索产品"
           style="width: 200px"
-          @search="onSearch"
+          @search="toSearch"
           :style="{ padding: '10px' }"
         />
 
@@ -62,19 +62,24 @@ export default defineComponent({
         name: 'host.account',
       })
     },
+    toSearch(searchValue) {
+      this.$router.push({
+        name: 'host.search',
+        params: { content: searchValue },
+      })
+    },
   },
   setup() {
     // 搜索框
     const seValue = ref('')
-    const onChange = (current) => {
-      console.log(current)
-    }
+    // const onChange = (current) => {
+    //   console.log(current)
+    // }
     const onSearch = (searchValue) => {
       console.log('use value', searchValue)
       console.log('or use this.value', seValue.value)
     }
     return {
-      onChange,
       seValue,
       onSearch,
     }

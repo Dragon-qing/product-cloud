@@ -289,10 +289,12 @@ export const constantRouterMap = [
     path: '/host',
     name: 'host',
     component: () => import('@/views/host/index'),
+    meta: { keepAlive: true },
     children: [
       {
         path: '/host/hostPage',
         name: 'host.hostPage',
+        meta: { keepAlive: true },
         component: () => import('@/views/host/HostPage'),
       },
       {
@@ -320,6 +322,12 @@ export const constantRouterMap = [
             meta: { title: 'menu.account.center', keepAlive: true, permission: ['user'] },
           },
         ],
+      },
+      // search
+      {
+        path: 'serach:content',
+        name: 'host.search',
+        component: () => import('@/views/search/searchResult'),
       },
     ],
   },
@@ -371,42 +379,6 @@ export const constantRouterMap = [
             component: () => import('@/views/personal/video'),
           },
         ],
-      },
-    ],
-  },
-  // classification
-  {
-    path: '/classification',
-    name: 'classification',
-    component: BlankLayout,
-    children: [
-      {
-        path: '/classification/tree',
-        name: 'tree',
-        component: () => import('@/views/classification/tree'),
-      },
-      {
-        path: '/classification/nextTree',
-        name: 'nextTree',
-        component: () => import('@/views/classification/nextTree'),
-      },
-      {
-        path: '/classification/project',
-        name: 'project',
-        component: () => import('@/views/classification/project'),
-      },
-    ],
-  },
-
-  {
-    path: '/serach',
-    name: 'search',
-    component: BlankLayout,
-    children: [
-      {
-        path: '/search/searchResult',
-        name: 'searchResult',
-        component: () => import('@/views/search/searchResult'),
       },
     ],
   },

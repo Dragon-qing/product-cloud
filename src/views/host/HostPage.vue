@@ -66,7 +66,6 @@
       </div>
     </a-layout-content>
     <!-- 页脚 -->
-    <a-layout-footer :style="{ textAlign: 'center' }"> product ©2022 Created by 计科1班2组 </a-layout-footer>
   </a-layout>
 </template>
 
