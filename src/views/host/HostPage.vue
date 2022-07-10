@@ -1,26 +1,7 @@
 <template>
   <a-layout>
-    <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%', padding: '0 0px' }">
-      <div class="logo">
-        <!-- <img src="~@/assets/logo.svg" class="logo" alt="logo" /> -->
-      </div>
-      <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }" align="right">
-        <a-input-search
-          v-model="seValue"
-          placeholder="搜索产品"
-          style="width: 200px"
-          @search="onSearch"
-          :style="{ padding: '10px' }"
-        />
-
-        <a-menu-item key="1">
-          <router-link to="/">分类</router-link>
-        </a-menu-item>
-        <a-menu-item key="2">日历事件</a-menu-item>
-        <a-menu-item key="3">个人中心</a-menu-item>
-      </a-menu>
-    </a-layout-header>
     <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">
+      <router-view></router-view>
       <a-row type="flex" align="middle" justify="center">
         <a-col :span="8" :order="1">
           <!-- 走马灯 -->
@@ -63,16 +44,14 @@
         <div style="background-color: #ececec; padding: 20px">
           <a-row :gutter="32">
             <a-col :span="6" v-for="(item, index) in idCard" :key="index" :style="{ marginTop: '15px' }">
-              <a-card hoverable size="small">
+              <a-card hoverable size="small" @click="toPersional">
                 <template #cover>
                   <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
                 </template>
                 <template class="ant-card-actions" #actions>
                   <div>
-                    <router-link to="/">
-                      <div>产品：{{ item }}</div>
-                      <div>浏览：4148</div>
-                    </router-link>
+                    <div>产品：{{ item }}</div>
+                    <div>浏览：4148</div>
                   </div>
                 </template>
                 <a-card-meta title="于晓波" description="HR数字化">
@@ -109,6 +88,12 @@ const activityEvents = {
 }
 export default defineComponent({
   methods: {
+    toPersional() {
+      this.$router.push({
+        name: 'personal.index',
+        params: { userId: 123 },
+      })
+    },
     getListData(dateValue) {
       const types = ['warning', 'success', 'error']
       let listData = []

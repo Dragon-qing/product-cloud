@@ -3,6 +3,42 @@ import { builder, getQueryParameters, getBody } from '@/mock/util'
 
 const totalCount = 5701
 
+const actions = (options) => {
+  const parameters = getQueryParameters(options)
+    const activityEvents = {
+      year: [2022, 2022, 2022, 2022, 2022, 2022, 2022],
+      day: [6, 2, 21, 8, 30, 19, 29],
+      month: [6, 6, 6, 6, 5, 7, 5],
+      title: [
+        '大会-武汉站',
+        'CIO成长计划--数字化转型能力进阶',
+        '数字化时代 ToB企业的增长思维',
+        '	葡萄城低代码和 BI 产品新版发布会',
+        '联想智慧办公发布会',
+        'EDIA2022企业数智应用大会暨第七届SaaS应用大会',
+        'Tapdata LDP 产品发布暨开源说明会',
+      ],
+    }
+    const result = {}
+    const pageNo = parseInt(parameters.pageNo)
+    const pageSize = parseInt(parameters.pageSize)
+    const totalPage = Math.ceil(totalCount / pageSize)
+    result.list = Array.from(Array(7).keys()).map((index) => ({
+        key: 1 + index + '',
+        title: activityEvents.title[index],
+        day: activityEvents.day[index],
+        year: activityEvents.year[index],
+        month: activityEvents.month[index],
+    }))
+    return builder({
+        pageSize: pageSize,
+        pageNo: pageNo,
+        totalCount: totalCount,
+        totalPage: totalPage,
+        data: result.list,
+    })
+}
+
 const list = (options) => {
   const parameters = getQueryParameters(options)
 
@@ -71,4 +107,5 @@ const create = (options) => {
 }
 
 Mock.mock(/\/demo\/list/, 'get', list)
+Mock.mock(/\/demo\/actions/, 'get', actions)
 Mock.mock(/\/demo\/create/, 'post', create)

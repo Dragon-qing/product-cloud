@@ -14,7 +14,7 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: 'menu.home' },
-    redirect: '/host/hostPage',
+    redirect: '/host',
     children: [
       // example
       {
@@ -173,76 +173,76 @@ export const asyncRouterMap = [
       },
 
       // account
-      {
-        path: '/account',
-        component: RouteView,
-        redirect: '/account/center',
-        name: 'account',
-        meta: { title: 'menu.account', icon: 'user', keepAlive: true, permission: ['user'] },
-        children: [
-          {
-            path: '/account/center',
-            name: 'center',
-            component: () => import('@/views/account/center'),
-            meta: { title: 'menu.account.center', keepAlive: true, permission: ['user'] },
-          },
-          {
-            path: '/account/settings',
-            name: 'settings',
-            component: () => import('@/views/account/settings/Index'),
-            meta: { title: 'menu.account.settings', hideHeader: true, permission: ['user'] },
-            redirect: '/account/settings/basic',
-            hideChildrenInMenu: true,
-            children: [
-              {
-                path: '/account/settings/basic',
-                name: 'BasicSettings',
-                component: () => import('@/views/account/settings/BasicSetting'),
-                meta: { title: 'account.settings.menuMap.basic', hidden: true, permission: ['user'] },
-              },
-              {
-                path: '/account/settings/security',
-                name: 'SecuritySettings',
-                component: () => import('@/views/account/settings/Security'),
-                meta: {
-                  title: 'account.settings.menuMap.security',
-                  hidden: true,
-                  keepAlive: true,
-                  permission: ['user'],
-                },
-              },
-              {
-                path: '/account/settings/custom',
-                name: 'CustomSettings',
-                component: () => import('@/views/account/settings/Custom'),
-                meta: { title: 'account.settings.menuMap.custom', hidden: true, keepAlive: true, permission: ['user'] },
-              },
-              {
-                path: '/account/settings/binding',
-                name: 'BindingSettings',
-                component: () => import('@/views/account/settings/Binding'),
-                meta: {
-                  title: 'account.settings.menuMap.binding',
-                  hidden: true,
-                  keepAlive: true,
-                  permission: ['user'],
-                },
-              },
-              {
-                path: '/account/settings/notification',
-                name: 'NotificationSettings',
-                component: () => import('@/views/account/settings/Notification'),
-                meta: {
-                  title: 'account.settings.menuMap.notification',
-                  hidden: true,
-                  keepAlive: true,
-                  permission: ['user'],
-                },
-              },
-            ],
-          },
-        ],
-      },
+      // {
+      //   path: '/account',
+      //   component: RouteView,
+      //   redirect: '/account/center',
+      //   name: 'account',
+      //   meta: { title: 'menu.account', icon: 'user', keepAlive: true, permission: ['user'] },
+      //   children: [
+      //     {
+      //       path: '/account/center',
+      //       name: 'center',
+      //       component: () => import('@/views/account/center'),
+      //       meta: { title: 'menu.account.center', keepAlive: true, permission: ['user'] },
+      //     },
+      //     {
+      //       path: '/account/settings',
+      //       name: 'settings',
+      //       component: () => import('@/views/account/settings/Index'),
+      //       meta: { title: 'menu.account.settings', hideHeader: true, permission: ['user'] },
+      //       redirect: '/account/settings/basic',
+      //       hideChildrenInMenu: true,
+      //       children: [
+      //         {
+      //           path: '/account/settings/basic',
+      //           name: 'BasicSettings',
+      //           component: () => import('@/views/account/settings/BasicSetting'),
+      //           meta: { title: 'account.settings.menuMap.basic', hidden: true, permission: ['user'] },
+      //         },
+      //         {
+      //           path: '/account/settings/security',
+      //           name: 'SecuritySettings',
+      //           component: () => import('@/views/account/settings/Security'),
+      //           meta: {
+      //             title: 'account.settings.menuMap.security',
+      //             hidden: true,
+      //             keepAlive: true,
+      //             permission: ['user'],
+      //           },
+      //         },
+      //         {
+      //           path: '/account/settings/custom',
+      //           name: 'CustomSettings',
+      //           component: () => import('@/views/account/settings/Custom'),
+      //           meta: { title: 'account.settings.menuMap.custom', hidden: true, keepAlive: true, permission: ['user'] },
+      //         },
+      //         {
+      //           path: '/account/settings/binding',
+      //           name: 'BindingSettings',
+      //           component: () => import('@/views/account/settings/Binding'),
+      //           meta: {
+      //             title: 'account.settings.menuMap.binding',
+      //             hidden: true,
+      //             keepAlive: true,
+      //             permission: ['user'],
+      //           },
+      //         },
+      //         {
+      //           path: '/account/settings/notification',
+      //           name: 'NotificationSettings',
+      //           component: () => import('@/views/account/settings/Notification'),
+      //           meta: {
+      //             title: 'account.settings.menuMap.notification',
+      //             hidden: true,
+      //             keepAlive: true,
+      //             permission: ['user'],
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
     ],
   },
   {
@@ -288,13 +288,38 @@ export const constantRouterMap = [
   {
     path: '/host',
     name: 'host',
-    component: BlankLayout,
-    redirect: '/host/hostPage',
+    component: () => import('@/views/host/index'),
     children: [
       {
         path: '/host/hostPage',
         name: 'host.hostPage',
         component: () => import('@/views/host/HostPage'),
+      },
+      {
+        path: 'classification',
+        name: 'host.classification',
+        component: () => import('@/views/classification/tree'),
+      },
+      {
+        path: 'calendar',
+        name: 'host.calendar',
+        component: () => import('@/views/host/Calendar'),
+      },
+      // account
+      {
+        path: 'account',
+        component: RouteView,
+        redirect: '/host/account/center',
+        name: 'host.account',
+        meta: { title: 'menu.account', icon: 'user', keepAlive: true, permission: ['user'] },
+        children: [
+          {
+            path: '/host/account/center',
+            name: 'center',
+            component: () => import('@/views/account/center'),
+            meta: { title: 'menu.account.center', keepAlive: true, permission: ['user'] },
+          },
+        ],
       },
     ],
   },
@@ -302,9 +327,9 @@ export const constantRouterMap = [
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
   },
-
+  // personal
   {
-    path: '/personal',
+    path: '/personal:userId',
     name: 'personal',
     component: BlankLayout,
     redirect: '/personal/index',
@@ -334,7 +359,7 @@ export const constantRouterMap = [
       },
     ],
   },
-
+  // classification
   {
     path: '/classification',
     name: 'classification',
