@@ -32,7 +32,6 @@ const list = (options) => {
   const pageNo = parseInt(parameters.pageNo)
   const pageSize = parseInt(parameters.pageSize)
   const totalPage = Math.ceil(totalCount / pageSize)
-debugger
   return builder({
     pageSize: pageSize,
     pageNo: pageNo,
