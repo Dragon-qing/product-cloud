@@ -55,7 +55,9 @@ export default defineComponent({
     NotificationOutlined,
   },
   created() {
-    this.toIntroduction()
+    this.$router.replace({
+      name: 'personal.introduciton',
+    })
   },
   methods: {
     toIntroduction() {

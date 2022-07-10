@@ -1,24 +1,10 @@
 <template>
   <a-layout>
-    <a-layout-header class="header">
-      <div class="logo" />
-      <a-menu v-model="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1">产品云图</a-menu-item>
-      </a-menu>
-    </a-layout-header>
     <a-layout>
       <a-layout-sider width="200" style="background: #fff">
         <a-menu v-model="selectedKeys2" mode="inline" :style="{ height: '100%', borderRight: 0 }">
           <template>
             <a-card hoverable style="width: 200px">
-              <template #cover>
-                <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
-              </template>
-              <template #actions>
-                <setting-outlined key="setting" />
-                <edit-outlined key="edit" />
-                <ellipsis-outlined key="ellipsis" />
-              </template>
               <a-card-meta title="刘伊谋" description="ESG分销产品">
                 <template #avatar>
                   <a-avatar src="https://joeschmoe.io/api/v1/random" />
@@ -35,26 +21,10 @@
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '700px' }">
           <div style="background-color: #ececec; padding: 20px">
             <a-row :gutter="24">
-              <a-col :span="6">
-                <a-card title="操作系统" :bordered="false" :headStyle="hstyle">
-                  <p>浏览量：164 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 打赏：23</p>
-                </a-card>
-              </a-col>
-              <a-col :span="6">
-                <a-card title="中间件" :bordered="false" :headStyle="hstyle">
-                  <p>浏览量：164 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 打赏：23</p>
-                </a-card>
-              </a-col>
-              <a-col :span="6">
-                <div style="background-color: aqua">
-                  <a-card title="数据库" :bordered="false" :headStyle="hstyle">
-                    <p>浏览量：164 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 打赏：23</p>
-                  </a-card>
-                </div>
-              </a-col>
-              <a-col :span="6">
-                <a-card title="安全软件" :bordered="false" :headStyle="hstyle">
-                  <p>浏览量：164 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 打赏：23</p>
+              <a-col :span="6" v-for="(item, index) in titleList" :key="index">
+                <a-card :title="item" :bordered="false" :headStyle="hstyle">
+                  <p>浏览量：164</p>
+                  <p>打赏：23</p>
                 </a-card>
               </a-col>
             </a-row>
@@ -75,12 +45,14 @@ export default defineComponent({
   },
 
   setup() {
+    const titleList = ref(['操作系统', '中间件', '数据库', '安全软件'])
     return {
       hstyle: { height: '200px', 'text-align': 'center' },
       selectedKeys1: ref(['2']),
       selectedKeys2: ref(['1']),
       collapsed: ref(false),
       openKeys: ref(['sub1']),
+      titleList,
     }
   },
 })

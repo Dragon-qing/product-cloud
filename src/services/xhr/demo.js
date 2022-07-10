@@ -4,6 +4,7 @@ const api = {
   list: '/demo/list',
   testlist: '/test/list',
   create: '/demo/create',
+  actions: '/demo/actions',
 }
 
 export default api
@@ -27,6 +28,14 @@ export function postBar(data) {
 export function getTest(params) {
   return request({
     url: api.testlist,
+    method: 'get',
+    params,
+  })
+}
+
+export function getActions(params) {
+  return request({
+    url: api.actions,
     method: 'get',
     params,
   })
