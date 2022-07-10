@@ -14,7 +14,7 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: 'menu.home' },
-    redirect: '/hoc/basic',
+    redirect: '/host',
     children: [
       // example
       {
@@ -22,7 +22,7 @@ export const asyncRouterMap = [
         name: 'example',
         redirect: '/example/foo',
         component: RouteView,
-        meta: { title: 'menu.example', keepAlive: true, icon: 'table', permission: ['dashboard'] },
+        meta: { title: 'menu.example', keepAlive: true, icon: 'eye', permission: ['table'] },
         children: [
           {
             path: '/example/foo',
@@ -37,7 +37,7 @@ export const asyncRouterMap = [
             meta: { title: 'menu.example.bar', keepAlive: true, permission: ['dashboard'] },
           },
           {
-            path: '/example/test',
+            path: '/console/example/test',
             name: 'example.test',
             component: () => import('@/views/example/test'),
             meta: { title: 'menu.example.test', keepAlive: true, permission: ['dashboard'] },
@@ -172,7 +172,7 @@ export const asyncRouterMap = [
         ],
       },
 
-      // // account
+      // account
       // {
       //   path: '/account',
       //   component: RouteView,
@@ -288,13 +288,46 @@ export const constantRouterMap = [
   {
     path: '/host',
     name: 'host',
-    component: BlankLayout,
-    redirect: '/host/hostPage',
+    component: () => import('@/views/host/index'),
+    meta: { keepAlive: true },
     children: [
       {
         path: '/host/hostPage',
         name: 'host.hostPage',
+        meta: { keepAlive: true },
         component: () => import('@/views/host/HostPage'),
+      },
+      {
+        path: 'classification',
+        name: 'host.classification',
+        component: () => import('@/views/classification/tree'),
+      },
+      {
+        path: 'calendar',
+        name: 'host.calendar',
+        component: () => import('@/views/host/Calendar'),
+      },
+      // account
+      {
+        path: 'account',
+        component: RouteView,
+        redirect: '/host/account/center',
+        name: 'host.account',
+        meta: { title: 'menu.account', icon: 'user', keepAlive: true, permission: ['user'] },
+        children: [
+          {
+            path: '/host/account/center',
+            name: 'center',
+            component: () => import('@/views/account/center'),
+            meta: { title: 'menu.account.center', keepAlive: true, permission: ['user'] },
+          },
+        ],
+      },
+      // search
+      {
+        path: 'serach:content',
+        name: 'host.search',
+        component: () => import('@/views/search/searchResult'),
       },
     ],
   },
@@ -302,4 +335,74 @@ export const constantRouterMap = [
     path: '/404',
     component: () => import(/* webpackChunkName: "fail" */ '@/views/exception/404'),
   },
+  // personal
+  {
+    path: '/personal:userId',
+    name: 'personal',
+    component: BlankLayout,
+    redirect: '/personal/index',
+    children: [
+      {
+        path: 'index',
+        name: 'personal.index',
+        meta: { keepAlive: true },
+        component: () => import('@/views/personal/index'),
+        children: [
+          {
+            path: 'introduction',
+            name: 'personal.introduciton',
+            component: () => import('@/views/personal/introduction'),
+          },
+          {
+            path: 'classification',
+            name: 'personal.classification',
+            component: () => import('@/views/personal/ClassificationTree'),
+          },
+          {
+            path: 'myProduct',
+            name: 'personal.myProduct',
+            component: () => import('@/views/personal/MyProduct'),
+          },
+          {
+            path: 'achievement',
+            name: 'personal.achievement',
+            component: () => import('@/views/personal/achievement'),
+          },
+          {
+            path: 'photo',
+            name: 'personal.photo',
+            component: () => import('@/views/personal/photo'),
+          },
+          {
+            path: 'video',
+            name: 'personal.video',
+            component: () => import('@/views/personal/video'),
+          },
+        ],
+      },
+    ],
+  },
+  // // classification
+  // {
+  //   path: '/classification',
+  //   name: 'classification',
+  //   component: BlankLayout,
+  //   children: [
+  //     {
+  //       path: '/classification/tree',
+  //       name: 'tree',
+  //       component: () => import('@/views/classification/tree'),
+  //     },
+  //     {
+  //       path: '/classification/nextTree',
+  //       name: 'nextTree',
+  //       component: () => import('@/views/classification/nextTree'),
+  //     },
+  //     {
+  //       path: '/classification/project',
+  //       name: 'project',
+  //       component: () => import('@/views/classification/project'),
+  //     },
+  //   ],
+  // },
 ]

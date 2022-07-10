@@ -20,7 +20,7 @@ const list = (options) => {
         pageNo: pageNo,
         totalCount: totalCount,
         totalPage: totalPage,
-        data: result,
+        data: result.list,
     })
 }
-Mock.mock(/\/demo\/test/, 'get', list)
+Mock.mock(/\/test\/list/, 'get', list)
