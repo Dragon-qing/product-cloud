@@ -14,7 +14,7 @@ export const asyncRouterMap = [
     name: 'index',
     component: BasicLayout,
     meta: { title: 'menu.home' },
-    redirect: '/hoc/basic',
+    redirect: '/host/hostPage',
     children: [
       // example
       {
@@ -22,10 +22,10 @@ export const asyncRouterMap = [
         name: 'example',
         redirect: '/example/foo',
         component: RouteView,
-        meta: { title: 'menu.example', keepAlive: true, icon: 'eye', permission: ['dashboard'] },
+        meta: { title: 'menu.example', keepAlive: true, icon: 'eye', permission: ['table'] },
         children: [
           {
-            path: 'foo',
+            path: '/example/foo',
             name: 'example.foo',
             component: () => import('@/views/example/Foo'),
             meta: { title: 'menu.example.foo', keepAlive: true, permission: ['dashboard'] },
@@ -37,7 +37,7 @@ export const asyncRouterMap = [
             meta: { title: 'menu.example.bar', keepAlive: true, permission: ['dashboard'] },
           },
           {
-            path: '/example/test',
+            path: '/console/example/test',
             name: 'example.test',
             component: () => import('@/views/example/test'),
             meta: { title: 'menu.example.test', keepAlive: true, permission: ['dashboard'] },
