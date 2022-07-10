@@ -330,6 +330,21 @@ export const constantRouterMap = [
             name: 'personal.myProduct',
             component: () => import('@/views/personal/MyProduct'),
           },
+          {
+            path: 'achievement',
+            name: 'personal.achievement',
+            component: () => import('@/views/personal/achievement'),
+          },
+          {
+            path: 'photo',
+            name: 'personal.photo',
+            component: () => import('@/views/personal/photo'),
+          },
+          {
+            path: 'video',
+            name: 'personal.video',
+            component: () => import('@/views/personal/video'),
+          },
         ],
       },
     ],
