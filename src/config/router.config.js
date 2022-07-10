@@ -307,11 +307,30 @@ export const constantRouterMap = [
     path: '/personal',
     name: 'personal',
     component: BlankLayout,
+    redirect: '/personal/index',
     children: [
       {
-        path: '/personal/index',
-        name: 'index',
+        path: 'index',
+        name: 'personal.index',
+        meta: { keepAlive: true },
         component: () => import('@/views/personal/index'),
+        children: [
+          {
+            path: 'introduction',
+            name: 'personal.introduciton',
+            component: () => import('@/views/personal/introduction'),
+          },
+          {
+            path: 'classification',
+            name: 'personal.classification',
+            component: () => import('@/views/personal/ClassificationTree'),
+          },
+          {
+            path: 'myProduct',
+            name: 'personal.myProduct',
+            component: () => import('@/views/personal/MyProduct'),
+          },
+        ],
       },
     ],
   },
