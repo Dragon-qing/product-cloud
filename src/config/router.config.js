@@ -372,4 +372,17 @@ export const constantRouterMap = [
       },
     ],
   },
+
+  {
+    path: '/serach',
+    name: 'search',
+    component: BlankLayout,
+    children: [
+      {
+        path: '/search/searchResult',
+        name: 'searchResult',
+        component: () => import('@/views/search/searchResult'),
+      },
+    ],
+  },
 ]
