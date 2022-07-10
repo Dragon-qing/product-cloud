@@ -334,4 +334,27 @@ export const constantRouterMap = [
       },
     ],
   },
+
+  {
+    path: '/classification',
+    name: 'classification',
+    component: BlankLayout,
+    children: [
+      {
+        path: '/classification/tree',
+        name: 'tree',
+        component: () => import('@/views/classification/tree'),
+      },
+      {
+        path: '/classification/nextTree',
+        name: 'nextTree',
+        component: () => import('@/views/classification/nextTree'),
+      },
+      {
+        path: '/classification/project',
+        name: 'project',
+        component: () => import('@/views/classification/project'),
+      },
+    ],
+  },
 ]
