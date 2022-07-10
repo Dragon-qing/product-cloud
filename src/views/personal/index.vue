@@ -19,7 +19,7 @@
               <span> 个人信息 </span>
             </template>
             <a-menu-item key="1" @click="toIntroduction">个人简介</a-menu-item>
-            <a-menu-item key="2">成果展示</a-menu-item>
+            <a-menu-item key="2" @click="toAchievement">成果展示</a-menu-item>
           </a-sub-menu>
           <a-sub-menu key="sub2">
             <template #title>
@@ -32,8 +32,8 @@
             <template #title>
               <span> 照片与视频 </span>
             </template>
-            <a-menu-item key="5">照片</a-menu-item>
-            <a-menu-item key="6">视频</a-menu-item>
+            <a-menu-item key="5" @click="toPhoto">照片</a-menu-item>
+            <a-menu-item key="6" @click="toVideo">视频</a-menu-item>
           </a-sub-menu>
         </a-menu>
       </a-layout-sider>
@@ -73,6 +73,21 @@ export default defineComponent({
     toClassification() {
       this.$router.push({
         name: 'personal.classification',
+      })
+    },
+    toAchievement() {
+      this.$router.push({
+        name: 'personal.achievement',
+      })
+    },
+    toPhoto() {
+      this.$router.push({
+        name: 'personal.photo',
+      })
+    },
+    toVideo() {
+      this.$router.push({
+        name: 'personal.video',
       })
     },
   },

@@ -355,6 +355,21 @@ export const constantRouterMap = [
             name: 'personal.myProduct',
             component: () => import('@/views/personal/MyProduct'),
           },
+          {
+            path: 'achievement',
+            name: 'personal.achievement',
+            component: () => import('@/views/personal/achievement'),
+          },
+          {
+            path: 'photo',
+            name: 'personal.photo',
+            component: () => import('@/views/personal/photo'),
+          },
+          {
+            path: 'video',
+            name: 'personal.video',
+            component: () => import('@/views/personal/video'),
+          },
         ],
       },
     ],
@@ -379,6 +394,19 @@ export const constantRouterMap = [
         path: '/classification/project',
         name: 'project',
         component: () => import('@/views/classification/project'),
+      },
+    ],
+  },
+
+  {
+    path: '/serach',
+    name: 'search',
+    component: BlankLayout,
+    children: [
+      {
+        path: '/search/searchResult',
+        name: 'searchResult',
+        component: () => import('@/views/search/searchResult'),
       },
     ],
   },
