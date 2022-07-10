@@ -28,8 +28,13 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 export default defineComponent({
+  data() {
+    return {
+      seValue: '',
+    }
+  },
   created() {
     this.$router.replace({
       name: 'host.hostPage',
@@ -69,22 +74,6 @@ export default defineComponent({
       })
     },
   },
-  setup() {
-    // 搜索框
-    const seValue = ref('')
-    // const onChange = (current) => {
-    //   console.log(current)
-    // }
-    const onSearch = (searchValue) => {
-      console.log('use value', searchValue)
-      console.log('or use this.value', seValue.value)
-    }
-    return {
-      seValue,
-      onSearch,
-    }
-  },
-  components: {},
 })
 </script>
 
