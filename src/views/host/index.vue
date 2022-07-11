@@ -29,16 +29,19 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { getLogo } from '@/services/xhr/demo'
 export default defineComponent({
   data() {
     return {
       seValue: '',
     }
   },
-  created() {
+  async created() {
     this.$router.replace({
       name: 'host.hostPage',
     })
+    const result = await getLogo()
+    console.log(result)
   },
   methods: {
     toHost() {

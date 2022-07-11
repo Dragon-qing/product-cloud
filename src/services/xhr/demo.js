@@ -5,6 +5,7 @@ const api = {
   testlist: '/test/list',
   create: '/demo/create',
   actions: '/demo/actions',
+  randomLogo: '/prod/logo_random_self',
 }
 
 export default api
@@ -12,6 +13,14 @@ export default api
 export function getFoo(params) {
   return request({
     url: api.list,
+    method: 'get',
+    params,
+  })
+}
+
+export function getLogo(params) {
+  return request({
+    url: api.randomLogo,
     method: 'get',
     params,
   })

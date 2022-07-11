@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import settings from '@/config/defaultSettings'
 
 const userApi = {
   Login: '/auth/login',
@@ -11,6 +12,7 @@ const userApi = {
   // get my info
   UserInfo: '/user/info',
   UserMenu: '/user/nav',
+  OdooLogin: '/web/session/authenticate',
 }
 
 /**
@@ -31,7 +33,21 @@ export function login(parameter) {
     data: parameter,
   })
 }
-
+const data = {
+  jsonrpc: '2.0',
+  params: {
+    login: 'admin',
+    password: 'admin',
+    db: settings.database,
+  },
+}
+export function OdooLogin(parameter) {
+  return request({
+    url: userApi.OdooLogin,
+    method: 'put',
+    data,
+  })
+}
 export function getSmsCaptcha(parameter) {
   return request({
     url: userApi.SendSms,
