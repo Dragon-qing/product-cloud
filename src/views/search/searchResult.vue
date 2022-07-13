@@ -18,7 +18,9 @@
         <a-layout-content :style="{ padding: '0 24px', minHeight: '280px' }">
           <div v-for="(item, index) in searchData.info" :key="index" :style="{ marginTop: '15px' }">
             <a-card>
-              <div v-html="item.company_name"></div>
+              公司名：<span v-html="item.company_name"></span>
+              <br />
+              产品名：<span v-html="item.product_name"></span>
               <p style="fontsize: 14px; color: rgba(0, 0, 0, 0.85); marginbottom: 16px; fontweight: 500"></p>
               <a-card title="简介" hoverable>
                 <a-row>
@@ -52,7 +54,6 @@ export default {
       immediate: true,
       handler() {
         this.labelNum = []
-        location.reload()
         this.search()
         this.updataLabels(this.content)
       },
