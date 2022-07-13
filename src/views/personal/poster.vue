@@ -72,6 +72,6 @@ export default {
 img {
   vertical-align: middle;
   border-style: none;
-  align: center;
+  align-content: center;
 }
 </style>

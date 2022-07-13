@@ -310,7 +310,6 @@ export const constantRouterMap = [
     path: '/host',
     name: 'host',
     component: () => import('@/views/host/index'),
-    meta: { keepAlive: true },
     children: [
       {
         path: '/host/hostPage',

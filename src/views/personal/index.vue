@@ -42,9 +42,7 @@
       </a-layout-sider>
       <a-layout style="padding: 0 24px 24px">
         <a-layout-content :style="{ background: '#fff', padding: '24px', marginTop: '15px', minHeight: '280px' }">
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
+          <router-view></router-view>
         </a-layout-content>
       </a-layout>
     </a-layout>

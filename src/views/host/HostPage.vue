@@ -74,7 +74,7 @@
                   <a-col :span="10">
                     <div class="logodiv2">
                       <img :src="item.img" alt="" />
-                      <a-button type="primary"> 查看推荐产品 </a-button>
+                      <a-button type="primary" @click="toProduct(item.id)"> 查看推荐产品 </a-button>
                     </div>
                   </a-col>
                 </a-row>
@@ -170,6 +170,13 @@ export default defineComponent({
     this.productDailyRecommends = await getProductDailyRecommends()
   },
   methods: {
+    toProduct(data) {
+      this.$router.push({
+        // path: '/personal/introduction',
+        name: 'product',
+        params: { id: data },
+      })
+    },
     toPersional(userId) {
       this.$router.push({
         // path: '/personal/introduction',
@@ -220,7 +227,7 @@ export default defineComponent({
 img {
   vertical-align: middle;
   border-style: none;
-  align: center;
+  align-content: center;
 }
 .logodiv {
   width: 500px;

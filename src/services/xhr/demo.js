@@ -15,6 +15,8 @@ const api = {
   productDailyRecommends: '/prod/get_product_daily_recommends',
   searchByType: '/prod/search_by_type',
   product: '/prod/product',
+  searchByKeyword: 'prod/search_by_keyword',
+  getLabelNames: 'prod/get_label_names',
 }
 
 export default api
@@ -22,6 +24,20 @@ export default api
 export function getAuthorSelfIntro(data) {
   return request({
     url: api.getAuthorHead,
+    method: 'get',
+    params: data,
+  })
+}
+export function getLabelNames(data) {
+  return request({
+    url: api.getLabelNames,
+    method: 'get',
+    params: data,
+  })
+}
+export function getSearchByKeyword(data) {
+  return request({
+    url: api.searchByKeyword,
     method: 'get',
     params: data,
   })

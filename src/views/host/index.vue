@@ -23,12 +23,10 @@
       </a-menu>
     </a-layout-header>
     <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">
-      <keep-alive>
-        <router-view></router-view>
-      </keep-alive>
+      <router-view></router-view>
     </a-layout-content>
     <!-- 页脚 -->
-    <a-layout-footer :style="{ textAlign: 'center' }"> product ©2022 Created by 计科1班2组 </a-layout-footer>
+    <a-layout-footer :style="{ textAlign: 'center' }"> product cloud ©2022 Created by 计科1班2组 </a-layout-footer>
   </a-layout>
 </template>
 
