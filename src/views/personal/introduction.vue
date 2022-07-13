@@ -9,7 +9,11 @@
 </template>
 
 <script>
-export default {}
+export default {
+  mounted() {
+    console.log('intro' + this.$route.params.userId)
+  },
+}
 </script>
 
 <style scoped>

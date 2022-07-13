@@ -337,48 +337,41 @@ export const constantRouterMap = [
   },
   // personal
   {
-    path: '/personal:userId',
+    path: '/personal/:userId',
     name: 'personal',
-    component: BlankLayout,
-    redirect: '/personal/index',
+    component: () => import('@/views/personal/index'),
+    // redirect: '/personal/index',
     children: [
-      {
-        path: 'index',
-        name: 'personal.index',
-        component: () => import('@/views/personal/index'),
-        children: [
-          {
-            path: 'introduction',
-            name: 'personal.introduciton',
-            component: () => import('@/views/personal/introduction'),
-          },
-          {
-            path: 'classification',
-            name: 'personal.classification',
-            component: () => import('@/views/personal/ClassificationTree'),
-          },
-          {
-            path: 'myProduct',
-            name: 'personal.myProduct',
-            component: () => import('@/views/personal/MyProduct'),
-          },
-          {
-            path: 'achievement',
-            name: 'personal.achievement',
-            component: () => import('@/views/personal/achievement'),
-          },
-          {
-            path: 'photo',
-            name: 'personal.photo',
-            component: () => import('@/views/personal/photo'),
-          },
-          {
-            path: 'video',
-            name: 'personal.video',
-            component: () => import('@/views/personal/video'),
-          },
-        ],
-      },
+        {
+          path: 'introduction',
+          name: 'personal.introduciton',
+          component: () => import('@/views/personal/introduction'),
+        },
+        {
+          path: 'classification',
+          name: 'personal.classification',
+          component: () => import('@/views/personal/ClassificationTree'),
+        },
+        {
+          path: 'myProduct',
+          name: 'personal.myProduct',
+          component: () => import('@/views/personal/MyProduct'),
+        },
+        {
+          path: 'achievement',
+          name: 'personal.achievement',
+          component: () => import('@/views/personal/achievement'),
+        },
+        {
+          path: 'photo',
+          name: 'personal.photo',
+          component: () => import('@/views/personal/photo'),
+        },
+        {
+          path: 'video',
+          name: 'personal.video',
+          component: () => import('@/views/personal/video'),
+        },
     ],
   },
   // // classification

@@ -9,6 +9,9 @@
           </a-avatar>
           用户
         </a-menu-item>
+        <a-menu-item key="2" @click="toHost">
+          <a-icon type="home"></a-icon>
+        </a-menu-item>
       </a-menu>
     </a-layout-header>
     <a-layout>
@@ -54,12 +57,20 @@ export default defineComponent({
     LaptopOutlined,
     NotificationOutlined,
   },
-  created() {
-    this.$router.replace({
-      name: 'personal.introduciton',
-    })
+  mounted() {
+    console.log(this.$route.params.userId)
+    this.$router
+      .replace({
+        name: 'personal.introduciton',
+      })
+      .catch(() => {})
   },
   methods: {
+    toHost() {
+      this.$router.push({
+        name: 'host.hostPage',
+      })
+    },
     toIntroduction() {
       this.$router.push({
         name: 'personal.introduciton',

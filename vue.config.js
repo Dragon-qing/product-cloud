@@ -106,7 +106,7 @@ const vueConfig = {
     // If you want to turn on the proxy, please remove the mockjs /src/main.jsL11
     proxy: {
       '/api': {
-        target: process.env.VUE_APP_ODOO_SERVER_URL,
+        target: process.env.VUE_APP_YUNTU_SERVER_URL,
         ws: false,
         changeOrigin: true,
         logLevel: 'debug',

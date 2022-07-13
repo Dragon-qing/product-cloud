@@ -101,7 +101,7 @@
         <div style="background-color: #ececec; padding: 20px">
           <a-row :gutter="32">
             <a-col :span="6" v-for="(item, index) in usertree" :key="index" :style="{ marginTop: '15px' }">
-              <a-card hoverable size="small" @click="toPersional">
+              <a-card hoverable size="small" @click="toPersional(item.user_id)">
                 <!-- <template #cover>
                   <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
                 </template> -->
@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { LeftCircleOutlined } from '@ant-design/icons-vue'
 import { Carousel, Calendar } from 'ant-design-vue'
 import { getAllTypeTree, getLogo, getProductDailyRecommends } from '@/services/xhr/demo'
@@ -153,6 +153,7 @@ export default defineComponent({
       product_counts: 0,
       view_counts: 0,
       productDailyRecommends: [],
+      userId: 123,
     }
   },
   async created() {
@@ -166,10 +167,11 @@ export default defineComponent({
     this.productDailyRecommends = await getProductDailyRecommends()
   },
   methods: {
-    toPersional() {
+    toPersional(userId) {
       this.$router.push({
-        name: 'personal.index',
-        params: { userId: 123 },
+        // path: '/personal/introduction',
+        name: 'personal',
+        params: { userId: userId },
       })
     },
     getListData(dateValue) {
@@ -192,20 +194,8 @@ export default defineComponent({
   },
   setup() {
     const idCard = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    // 搜索框
-    const seValue = ref('')
-    const onChange = (current) => {
-      console.log(current)
-    }
-    const onSearch = (searchValue) => {
-      console.log('use value', searchValue)
-      console.log('or use this.value', seValue.value)
-    }
     return {
       idCard,
-      onChange,
-      seValue,
-      onSearch,
       activityEvents,
     }
   },
@@ -267,7 +257,7 @@ export default defineComponent({
   /* overflow: hidden; */
 }
 .ant-carousel .slick-slide h3 {
-  color: rgba(163, 59, 201, 0.914);
+  color: rgba(42, 71, 185, 0.914);
 }
 /* 日历 */
 .events {

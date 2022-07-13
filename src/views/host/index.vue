@@ -5,7 +5,10 @@
         <!-- <img src="~@/assets/logo.svg" class="logo" alt="logo" /> -->
       </div>
       <a-menu theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }" align="right">
-        <a-menu-item key="1" align="left" @click="toHost"> 主页 </a-menu-item>
+        <a-menu-item key="1" align="left" @click="toHost">
+          <a-icon type="home"></a-icon>
+          主页
+        </a-menu-item>
         <a-input-search
           v-model="seValue"
           placeholder="搜索产品"
@@ -36,9 +39,11 @@ export default defineComponent({
     }
   },
   async created() {
-    this.$router.replace({
-      name: 'host.hostPage',
-    })
+    this.$router
+      .replace({
+        name: 'host.hostPage',
+      })
+      .catch(() => {})
   },
   methods: {
     toHost() {
