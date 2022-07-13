@@ -345,7 +345,6 @@ export const constantRouterMap = [
       {
         path: 'index',
         name: 'personal.index',
-        meta: { keepAlive: true },
         component: () => import('@/views/personal/index'),
         children: [
           {

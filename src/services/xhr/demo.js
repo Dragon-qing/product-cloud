@@ -6,6 +6,8 @@ const api = {
   create: '/demo/create',
   actions: '/demo/actions',
   randomLogo: '/prod/logo_random_self',
+  allTypeTree: '/prod/all_type_tree',
+  productDailyRecommends: '/prod/get_product_daily_recommends',
 }
 
 export default api
@@ -18,11 +20,23 @@ export function getFoo(params) {
   })
 }
 
-export function getLogo(params) {
+export function getLogo() {
   return request({
     url: api.randomLogo,
     method: 'get',
-    params,
+  })
+}
+
+export function getProductDailyRecommends() {
+  return request({
+    url: api.productDailyRecommends,
+    method: 'get',
+  })
+}
+export function getAllTypeTree() {
+  return request({
+    url: api.allTypeTree,
+    method: 'get',
   })
 }
 

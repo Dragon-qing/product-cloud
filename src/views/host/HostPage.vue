@@ -5,21 +5,78 @@
       <a-row type="flex" align="middle" justify="center">
         <a-col :span="8" :order="1">
           <!-- 走马灯 -->
-          <Carousel autoplay>
-            <div>
-              <h3>1</h3>
+          <div>
+            <a-row :gutter="10">
+              <a-col :span="12">
+                <div>
+                  <Carousel autoplay arrows :dots="false" :style="{ width: '120px', height: '120px' }">
+                    <div v-for="(item, index) in logos" :key="index" class="logodiv">
+                      <img :src="item.logo" alt="" />
+                    </div>
+                  </Carousel>
+                </div>
+              </a-col>
+              <a-col :span="10">
+                <div>
+                  <a-row :gutter="10">
+                    <a-col :span="20">
+                      <a-statistic title="产品" :value="product_counts" style="margin-right: 50px"> </a-statistic>
+                    </a-col>
+                    <a-col :span="20">
+                      <a-statistic title="浏览" :value="view_counts" class="demo-class">
+                        <template #suffix>
+                          <span><a-icon type="eye" /></span>
+                        </template>
+                      </a-statistic>
+                    </a-col>
+                  </a-row>
+                </div>
+              </a-col>
+            </a-row>
+          </div>
+          <!-- 第二个走马灯区域 -->
+          <Carousel autoplay dots :style="{ marginTop: '10px' }">
+            <div v-for="(item, index) in productDailyRecommends" :key="index">
+              <div :style="{ maxWidth: '620', maxHeight: '190' }">
+                <a-row :gutter="6">
+                  <a-col :span="13">
+                    <div>
+                      <div>
+                        <h3>{{ item.product_name }}</h3>
+                      </div>
+
+                      <div>
+                        <a-row :gutter="10">
+                          <a-col :span="8">
+                            <a-statistic title="评分" :value="item.total_score"> </a-statistic>
+                          </a-col>
+                          <a-col :span="8">
+                            <a-statistic title="浏览" :value="item.views_count" class="demo-class">
+                              <template #suffix>
+                                <span><a-icon type="eye" /></span>
+                              </template>
+                            </a-statistic>
+                          </a-col>
+                          <a-col :span="8">
+                            <a-statistic title="评论数" :value="item.comment_num" class="demo-class">
+                              <!-- <template #suffix>
+                                <span><a-icon type="" /></span>
+                              </template> -->
+                            </a-statistic>
+                          </a-col>
+                        </a-row>
+                      </div>
+                    </div>
+                  </a-col>
+                  <a-col :span="10">
+                    <div class="logodiv2">
+                      <img :src="item.img" alt="" />
+                      <a-button type="primary"> 查看推荐产品 </a-button>
+                    </div>
+                  </a-col>
+                </a-row>
+              </div>
             </div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
-          </Carousel>
-          <Carousel autoplay>
-            <div>
-              <h3>1</h3>
-            </div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
           </Carousel>
         </a-col>
         <a-col :span="10" :order="2">
@@ -43,20 +100,20 @@
       <div :style="{ background: '#fff', padding: '24px', minHeight: '380px', marginTop: '1ch' }">
         <div style="background-color: #ececec; padding: 20px">
           <a-row :gutter="32">
-            <a-col :span="6" v-for="(item, index) in idCard" :key="index" :style="{ marginTop: '15px' }">
+            <a-col :span="6" v-for="(item, index) in usertree" :key="index" :style="{ marginTop: '15px' }">
               <a-card hoverable size="small" @click="toPersional">
-                <template #cover>
+                <!-- <template #cover>
                   <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
-                </template>
+                </template> -->
                 <template class="ant-card-actions" #actions>
                   <div>
-                    <div>产品：{{ item }}</div>
-                    <div>浏览：4148</div>
+                    <div>产品：{{ item.product_counts }}</div>
+                    <div>浏览：{{ item.view_counts }}</div>
                   </div>
                 </template>
-                <a-card-meta title="于晓波" description="HR数字化">
+                <a-card-meta :title="item.user_name" :description="item.type_name">
                   <template #avatar>
-                    <a-avatar src="https://s2.loli.net/2022/04/14/uIvO5nlyDX8429Y.png" />
+                    <a-avatar :src="item.user_image" />
                   </template>
                 </a-card-meta>
               </a-card>
@@ -71,7 +128,9 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import { LeftCircleOutlined } from '@ant-design/icons-vue'
 import { Carousel, Calendar } from 'ant-design-vue'
+import { getAllTypeTree, getLogo, getProductDailyRecommends } from '@/services/xhr/demo'
 const activityEvents = {
   day: [6, 2, 21, 8, 30, 19, 29],
   month: [6, 6, 6, 6, 5, 7, 5],
@@ -86,6 +145,26 @@ const activityEvents = {
   ],
 }
 export default defineComponent({
+  data() {
+    return {
+      logos: [],
+      systree: [],
+      usertree: [],
+      product_counts: 0,
+      view_counts: 0,
+      productDailyRecommends: [],
+    }
+  },
+  async created() {
+    // 嵌套式的结构语法
+    const [{ systree, usertree }] = await getAllTypeTree()
+    this.logos = await getLogo()
+    this.systree = systree
+    this.usertree = usertree
+    this.product_counts = systree[0].product_counts
+    this.view_counts = systree[0].view_counts
+    this.productDailyRecommends = await getProductDailyRecommends()
+  },
   methods: {
     toPersional() {
       this.$router.push({
@@ -133,11 +212,37 @@ export default defineComponent({
   components: {
     Carousel,
     Calendar,
+    LeftCircleOutlined,
   },
 })
 </script>
 
 <style scoped>
+/* 图片显示 */
+.logodiv {
+  width: 500px;
+  height: 400px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.logodiv img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: auto;
+}
+.logodiv2 {
+  width: 500px;
+  height: 190px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.logodiv2 img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: auto;
+}
 #components-layout-demo-fixed .logo {
   width: 120px;
   height: 31px;
@@ -154,15 +259,15 @@ export default defineComponent({
 }
 /* 走马灯 */
 .ant-carousel {
-  margin-top: 1ch;
+  /* margin-top: 1ch; */
   text-align: center;
   height: 280px;
   line-height: 280px;
-  background: #364d79;
-  overflow: hidden;
+  background: #eaf1f7;
+  /* overflow: hidden; */
 }
 .ant-carousel .slick-slide h3 {
-  color: #fff;
+  color: rgba(163, 59, 201, 0.914);
 }
 /* 日历 */
 .events {
@@ -183,5 +288,8 @@ export default defineComponent({
 }
 .notes-month section {
   font-size: 28px;
+}
+.testdiv {
+  border: #141414 1px solid;
 }
 </style>
