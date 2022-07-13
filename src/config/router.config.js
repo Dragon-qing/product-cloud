@@ -284,6 +284,27 @@ export const constantRouterMap = [
       },
     ],
   },
+  // product
+  {
+    path: '/product/:id',
+    name: 'product',
+    meta: { keepAlive: true },
+    component: () => import('@/views/product/index'),
+    children: [
+       // search
+       {
+        path: '/product:id/serach/:content',
+        name: 'product.search',
+        component: () => import('@/views/search/searchResult'),
+      },
+      // product
+      {
+        path: 'page',
+        name: 'product.page',
+        component: () => import('@/views/product/product'),
+      },
+    ],
+  },
   // host
   {
     path: '/host',
@@ -325,7 +346,7 @@ export const constantRouterMap = [
       },
       // search
       {
-        path: 'serach:content',
+        path: 'serach/:content',
         name: 'host.search',
         component: () => import('@/views/search/searchResult'),
       },
@@ -340,37 +361,48 @@ export const constantRouterMap = [
     path: '/personal/:userId',
     name: 'personal',
     component: () => import('@/views/personal/index'),
-    // redirect: '/personal/index',
     children: [
         {
           path: 'introduction',
           name: 'personal.introduciton',
           component: () => import('@/views/personal/introduction'),
+          meta: { keepAlive: true },
+        },
+        {
+          path: 'poster/:type',
+          name: 'personal.poster',
+          component: () => import('@/views/personal/poster'),
+          meta: { keepAlive: true },
         },
         {
           path: 'classification',
           name: 'personal.classification',
           component: () => import('@/views/personal/ClassificationTree'),
+          meta: { keepAlive: true },
         },
         {
           path: 'myProduct',
           name: 'personal.myProduct',
           component: () => import('@/views/personal/MyProduct'),
+          meta: { keepAlive: true },
         },
         {
           path: 'achievement',
           name: 'personal.achievement',
           component: () => import('@/views/personal/achievement'),
+          meta: { keepAlive: true },
         },
         {
           path: 'photo',
           name: 'personal.photo',
           component: () => import('@/views/personal/photo'),
+          meta: { keepAlive: true },
         },
         {
           path: 'video',
           name: 'personal.video',
           component: () => import('@/views/personal/video'),
+          meta: { keepAlive: true },
         },
     ],
   },

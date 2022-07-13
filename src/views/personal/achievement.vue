@@ -1,20 +1,42 @@
 <template>
   <!-- <a-empty /> -->
-  <Atimeline>
-    <AtimelineItem>2017年12月，荣获“影响中国”2017年度教育人物</AtimelineItem>
-    <AtimelineItem>2018年9月，马云发出公开信宣布将于2019年9月10日卸任集团董事局主席，由CEO张勇接任；</AtimelineItem>
-    <AtimelineItem>2019年3月，马云以373亿美元财富排名2019年福布斯全球亿万富豪榜第21位；</AtimelineItem>
-    <AtimelineItem>2021年4月，马云以484亿美元财富位列《2021福布斯全球富豪榜》第26名。</AtimelineItem>
-  </Atimeline>
+  <div>
+    <div v-if="isEmptyObj(workInfo)">
+      <Empty />
+    </div>
+    <div v-else>
+      <Atimeline>
+        <AtimelineItem v-for="(item, index) in workInfo" :key="index">
+          {{ item.work_name }}
+          链接：<a :href="item.work_url" target="_blank">{{ item.work_url }}</a>
+        </AtimelineItem>
+      </Atimeline>
+    </div>
+  </div>
 </template>
 
 <script>
-import { Timeline } from 'ant-design-vue'
+import { Timeline, Empty } from 'ant-design-vue'
+import { getAuthorWorksShow } from '@/services/xhr/demo'
 const timelineItem = Timeline.Item
 export default {
+  data() {
+    return {
+      workInfo: [1],
+    }
+  },
+  methods: {
+    isEmptyObj(obj) {
+      return Object.keys(obj).length === 0
+    },
+  },
+  async mounted() {
+    this.workInfo = await getAuthorWorksShow({ id: this.$route.params.userId })
+  },
   components: {
     Atimeline: Timeline,
     AtimelineItem: timelineItem,
+    Empty,
   },
 }
 </script>

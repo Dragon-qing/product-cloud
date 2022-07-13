@@ -16,10 +16,6 @@
           @search="toSearch"
           :style="{ padding: '10px' }"
         />
-
-        <a-menu-item key="2" @click="toClassification"> 分类 </a-menu-item>
-        <a-menu-item key="3" @click="toCalendar">日历事件</a-menu-item>
-        <a-menu-item key="4" @click="toUserCenter">个人中心</a-menu-item>
       </a-menu>
     </a-layout-header>
     <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">
@@ -33,57 +29,40 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
-export default defineComponent({
+export default {
+  async created() {
+    this.toProductPage()
+  },
   data() {
     return {
       seValue: '',
     }
   },
-  async created() {
-    this.$router
-      .replace({
-        name: 'host.hostPage',
-      })
-      .catch(() => {})
-  },
   methods: {
+    toProductPage() {
+      this.$router
+        .replace({
+          name: 'product.page',
+        })
+        .catch(() => {})
+    },
     toHost() {
       this.$router.push({
         name: 'host.hostPage',
       })
     },
-    toClassification() {
-      this.$router.push({
-        name: 'host.classification',
-      })
-    },
-    toCalendar() {
-      this.$router.push({
-        name: 'host.calendar',
-      })
-    },
-    toUserCenter() {
-      this.$router.push({
-        name: 'host.account',
-      })
-    },
     toSearch(searchValue) {
       this.$router.push({
-        name: 'host.search',
+        name: 'product.search',
         params: { content: searchValue },
       })
     },
   },
-})
+}
 </script>
 
 <style scoped>
-#components-layout-demo-fixed .logo {
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 16px 24px 16px 0;
-  float: left;
+.div1 {
+  background-color: #f4f8fe;
 }
 </style>

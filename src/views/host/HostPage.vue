@@ -11,7 +11,7 @@
                 <div>
                   <Carousel autoplay arrows :dots="false" :style="{ width: '120px', height: '120px' }">
                     <div v-for="(item, index) in logos" :key="index" class="logodiv">
-                      <img :src="item.logo" alt="" />
+                      <img :src="item.logo" alt="" class="case-img-item" />
                     </div>
                   </Carousel>
                 </div>
@@ -49,6 +49,9 @@
                         <a-row :gutter="10">
                           <a-col :span="8">
                             <a-statistic title="评分" :value="item.total_score"> </a-statistic>
+                            <template #suffix>
+                              <span><a-icon type="star" /></span>
+                            </template>
                           </a-col>
                           <a-col :span="8">
                             <a-statistic title="浏览" :value="item.views_count" class="demo-class">
@@ -59,9 +62,9 @@
                           </a-col>
                           <a-col :span="8">
                             <a-statistic title="评论数" :value="item.comment_num" class="demo-class">
-                              <!-- <template #suffix>
-                                <span><a-icon type="" /></span>
-                              </template> -->
+                              <template #suffix>
+                                <span><a-icon type="comment" /></span>
+                              </template>
                             </a-statistic>
                           </a-col>
                         </a-row>
@@ -209,11 +212,23 @@ export default defineComponent({
 
 <style scoped>
 /* 图片显示 */
+.case-img-item {
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;
+}
+img {
+  vertical-align: middle;
+  border-style: none;
+  align: center;
+}
 .logodiv {
   width: 500px;
   height: 400px;
-  display: table-cell;
-  vertical-align: middle;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .logodiv img {
   max-width: 100%;
