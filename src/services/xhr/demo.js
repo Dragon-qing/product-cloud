@@ -17,6 +17,8 @@ const api = {
   product: '/prod/product',
   searchByKeyword: 'prod/search_by_keyword',
   getLabelNames: 'prod/get_label_names',
+  calendar: 'calendar/product_info',
+
 }
 
 export default api
@@ -31,6 +33,13 @@ export function getAuthorSelfIntro(data) {
 export function getLabelNames(data) {
   return request({
     url: api.getLabelNames,
+    method: 'get',
+    params: data,
+  })
+}
+export function getCalendar(data) {
+  return request({
+    url: api.calendar,
     method: 'get',
     params: data,
   })

@@ -133,20 +133,20 @@
 import { defineComponent } from 'vue'
 import { LeftCircleOutlined } from '@ant-design/icons-vue'
 import { Carousel, Calendar } from 'ant-design-vue'
-import { getAllTypeTree, getLogo, getProductDailyRecommends } from '@/services/xhr/demo'
-const activityEvents = {
-  day: [6, 2, 21, 8, 30, 19, 29],
-  month: [6, 6, 6, 6, 5, 7, 5],
-  titile: [
-    '大会-武汉站',
-    'CIO成长计划--数字化转型能力进阶',
-    '数字化时代 ToB企业的增长思维',
-    '	葡萄城低代码和 BI 产品新版发布会',
-    '联想智慧办公发布会',
-    'EDIA2022企业数智应用大会暨第七届SaaS应用大会',
-    'Tapdata LDP 产品发布暨开源说明会',
-  ],
-}
+import { getAllTypeTree, getCalendar, getLogo, getProductDailyRecommends } from '@/services/xhr/demo'
+// const activityEvents = {
+//   day: [6, 2, 21, 8, 30, 19, 29],
+//   month: [6, 6, 6, 6, 5, 7, 5],
+//   titile: [
+//     '大会-武汉站',
+//     'CIO成长计划--数字化转型能力进阶',
+//     '数字化时代 ToB企业的增长思维',
+//     '	葡萄城低代码和 BI 产品新版发布会',
+//     '联想智慧办公发布会',
+//     'EDIA2022企业数智应用大会暨第七届SaaS应用大会',
+//     'Tapdata LDP 产品发布暨开源说明会',
+//   ],
+// }
 export default defineComponent({
   data() {
     return {
@@ -157,6 +157,7 @@ export default defineComponent({
       view_counts: 0,
       productDailyRecommends: [],
       userId: 123,
+      calendar: [],
     }
   },
   async created() {
@@ -168,6 +169,7 @@ export default defineComponent({
     this.product_counts = systree[0].product_counts
     this.view_counts = systree[0].view_counts
     this.productDailyRecommends = await getProductDailyRecommends()
+    this.calendar = await getCalendar({ id: 0 })
   },
   methods: {
     toProduct(data) {
@@ -187,9 +189,14 @@ export default defineComponent({
     getListData(dateValue) {
       const types = ['warning', 'success', 'error']
       let listData = []
-      for (let i = 0; i < activityEvents.titile.length; i++) {
-        if (dateValue.date() === activityEvents.day[i] && dateValue.month() === activityEvents.month[i]) {
-          listData = [{ type: types[Math.floor(Math.random() * 3)], content: activityEvents.titile[i] }]
+      for (let i = 0; i < this.calendar.length; i++) {
+        const date = this.calendar[i].start_date.split('-')
+        if (
+          dateValue.date() === parseInt(date[2]) &&
+          dateValue.month() === parseInt(date[1]) - 1 &&
+          dateValue.year() === parseInt(date[0])
+        ) {
+          listData = [{ type: types[Math.floor(Math.random() * 3)], content: this.calendar[i].name }]
         }
       }
 
@@ -206,7 +213,6 @@ export default defineComponent({
     const idCard = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     return {
       idCard,
-      activityEvents,
     }
   },
   components: {

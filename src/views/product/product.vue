@@ -4,7 +4,7 @@
       <a-descriptions-item label="产品名称">{{ productData.product_name }}</a-descriptions-item>
       <a-descriptions-item label="解决方案"> {{ productData.solution }}</a-descriptions-item>
       <a-descriptions-item label="官网地址">
-        <a :href="productData.web_url">{{ productData.web_url }}</a></a-descriptions-item
+        <a :href="productData.web_url" target="_blank">{{ productData.web_url }}</a></a-descriptions-item
       >
       <a-descriptions-item label="公司名称">{{ productData.company_name }}</a-descriptions-item>
       <a-descriptions-item label="产品图片" :span="2">
