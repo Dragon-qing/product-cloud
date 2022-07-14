@@ -18,6 +18,8 @@ const api = {
   searchByKeyword: 'prod/search_by_keyword',
   getLabelNames: 'prod/get_label_names',
   calendar: 'calendar/product_info',
+  authorPhotos: '/prod/author_photos',
+  authorVideos: '/prod/author_videos',
 
 }
 
@@ -26,6 +28,20 @@ export default api
 export function getAuthorSelfIntro(data) {
   return request({
     url: api.getAuthorHead,
+    method: 'get',
+    params: data,
+  })
+}
+export function getAuthorPhotos(data) {
+  return request({
+    url: api.authorPhotos,
+    method: 'get',
+    params: data,
+  })
+}
+export function getAuthorVideos(data) {
+  return request({
+    url: api.authorVideos,
     method: 'get',
     params: data,
   })
