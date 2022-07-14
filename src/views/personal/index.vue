@@ -4,10 +4,13 @@
       <div class="logo" />
       <a-menu v-model="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
         <a-menu-item key="1">
-          <a-avatar size="large">
+          <a-avatar size="large" :src="userInfo.head_img">
             <template #icon></template>
           </a-avatar>
-          用户
+          {{ userInfo.name }}
+        </a-menu-item>
+        <a-menu-item key="2" @click="toHost">
+          <a-icon type="home"></a-icon>
         </a-menu-item>
       </a-menu>
     </a-layout-header>
@@ -48,18 +51,32 @@
 <script>
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue'
 import { defineComponent, ref } from 'vue'
+import { getAuthorSelfIntro } from '@/services/xhr/demo'
 export default defineComponent({
+  data() {
+    return {
+      userInfo: [],
+    }
+  },
   components: {
     UserOutlined,
     LaptopOutlined,
     NotificationOutlined,
   },
-  created() {
-    this.$router.replace({
-      name: 'personal.introduciton',
-    })
+  async created() {
+    this.userInfo = await getAuthorSelfIntro({ id: this.$route.params.userId })
+    this.$router
+      .replace({
+        name: 'personal.introduciton',
+      })
+      .catch(() => {})
   },
   methods: {
+    toHost() {
+      this.$router.push({
+        name: 'host.hostPage',
+      })
+    },
     toIntroduction() {
       this.$router.push({
         name: 'personal.introduciton',

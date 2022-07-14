@@ -45,27 +45,27 @@
 </template>
 
 <script>
-import { getActions } from '@/services/xhr/demo'
+import { getCalendar } from '@/services/xhr/demo'
 const columns = [
   {
     title: '主题名称',
-    dataIndex: 'title',
-    key: 'title',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
-    title: '年',
-    dataIndex: 'year',
-    key: 'year',
+    title: '开始时间',
+    dataIndex: 'start_date',
+    key: 'start_date',
   },
   {
-    title: '月',
-    dataIndex: 'month',
-    key: 'month',
+    title: '结束时间',
+    dataIndex: 'end_date',
+    key: 'end_date',
   },
   {
-    title: '日',
-    dataIndex: 'day',
-    key: 'day',
+    title: '链接',
+    dataIndex: 'link_url',
+    key: 'link_url',
   },
 ]
 
@@ -78,10 +78,8 @@ export default {
   },
   async created() {
     // 嵌套式的结构语法
-    const {
-      result: { data },
-    } = await getActions()
-    this.data = data
+    const result = await getCalendar({ id: 0 })
+    this.data = result
   },
 }
 </script>

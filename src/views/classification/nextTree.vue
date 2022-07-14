@@ -38,12 +38,12 @@
             <a-row :gutter="24">
               <a-col :span="6">
                 <a-card title="国产操作系统" :bordered="false" :headStyle="hstyle">
-                  <p>浏览量：164 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 打赏：23</p>
+                  <p>浏览量：164 打赏：23</p>
                 </a-card>
               </a-col>
               <a-col :span="6">
                 <a-card title="Linux" :bordered="false" :headStyle="hstyle">
-                  <p>浏览量：164 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 打赏：23</p>
+                  <p>浏览量：164 打赏：23</p>
                 </a-card>
               </a-col>
             </a-row>
