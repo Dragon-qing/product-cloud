@@ -61,88 +61,88 @@ export const asyncRouterMap = [
       //   ],
       // },
       // hoc demo
-      {
-        path: '/hoc',
-        name: 'hoc',
-        component: RouteView,
-        redirect: '/hoc/basic',
-        meta: { title: 'menu.hoc', icon: 'table', permission: ['table'] },
-        children: [
-          {
-            path: '/hoc/basic',
-            name: 'hoc.basic', // 注意 name 是不可以重名的
-            component: () => import(/* webpackChunkName: "hoc" */ '@/pages/hoc/BasicHoc'),
-            props: require('@/pages/hoc/foo.bar.baz.vue'),
-            meta: { title: 'menu.hoc.basic', keepAlive: true, permission: ['table'] },
-          },
-        ],
-      },
+      // {
+      //   path: '/hoc',
+      //   name: 'hoc',
+      //   component: RouteView,
+      //   redirect: '/hoc/basic',
+      //   meta: { title: 'menu.hoc', icon: 'table', permission: ['table'] },
+      //   children: [
+      //     {
+      //       path: '/hoc/basic',
+      //       name: 'hoc.basic', // 注意 name 是不可以重名的
+      //       component: () => import(/* webpackChunkName: "hoc" */ '@/pages/hoc/BasicHoc'),
+      //       props: require('@/pages/hoc/foo.bar.baz.vue'),
+      //       meta: { title: 'menu.hoc.basic', keepAlive: true, permission: ['table'] },
+      //     },
+      //   ],
+      // },
       // table demo
-      {
-        path: '/table',
-        name: 'table',
-        component: RouteView,
-        redirect: '/table/basic',
-        meta: { title: 'menu.table', icon: 'table', permission: ['table'] },
-        children: [
-          {
-            path: '/table/basic',
-            name: 'basic',
-            component: () => import(/* webpackChunkName: "table" */ '@/pages/table/Basic'),
-            meta: { title: 'menu.table.basic', keepAlive: true, permission: ['table'] },
-          },
-          {
-            path: '/table/filter',
-            name: 'filter',
-            component: () => import(/* webpackChunkName: "table" */ '@/pages/table/Filter'),
-            meta: { title: 'menu.table.filter', keepAlive: true, permission: ['table'] },
-          },
-        ],
-      },
+      // {
+      //   path: '/table',
+      //   name: 'table',
+      //   component: RouteView,
+      //   redirect: '/table/basic',
+      //   meta: { title: 'menu.table', icon: 'table', permission: ['table'] },
+      //   children: [
+      //     {
+      //       path: '/table/basic',
+      //       name: 'basic',
+      //       component: () => import(/* webpackChunkName: "table" */ '@/pages/table/Basic'),
+      //       meta: { title: 'menu.table.basic', keepAlive: true, permission: ['table'] },
+      //     },
+      //     {
+      //       path: '/table/filter',
+      //       name: 'filter',
+      //       component: () => import(/* webpackChunkName: "table" */ '@/pages/table/Filter'),
+      //       meta: { title: 'menu.table.filter', keepAlive: true, permission: ['table'] },
+      //     },
+      //   ],
+      // },
       // page / template demo
-      {
-        path: '/template',
-        name: 'template',
-        component: RouteView,
-        redirect: '/template/search',
-        meta: { title: 'menu.template', icon: 'table', permission: ['table'] },
-        children: [
-          {
-            path: '/template/search',
-            name: 'template.search',
-            redirect: '/template/search/basic',
-            component: RouteView,
-            meta: { title: 'menu.template.search', icon: 'table', permission: ['table'] },
-            children: [
-              {
-                path: '/template/search/basic',
-                name: 'template.search.basic',
-                // 异步组件参考 https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6
-                component: () => import(/* webpackChunkName: "templates" */ '@/templates/Search'),
-                props: require('@/modules/templates/search/basic'),
-                meta: { title: 'menu.template.search.basic', keepAlive: true, permission: ['table'] },
-              },
-            ],
-          },
-          {
-            path: '/template/form',
-            name: 'template.form',
-            redirect: '/template/form/basic',
-            component: RouteView,
-            meta: { title: 'menu.template.form', icon: 'table', permission: ['table'] },
-            children: [
-              {
-                path: '/template/form/basic',
-                name: 'template.form.basic',
-                // 异步组件参考 https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6
-                component: () => import(/* webpackChunkName: "templates" */ '@/templates/Create'),
-                props: require('@/modules/templates/form/basic'),
-                meta: { title: 'menu.template.form.basic', keepAlive: true, permission: ['table'] },
-              },
-            ],
-          },
-        ],
-      },
+      // {
+      //   path: '/template',
+      //   name: 'template',
+      //   component: RouteView,
+      //   redirect: '/template/search',
+      //   meta: { title: 'menu.template', icon: 'table', permission: ['table'] },
+      //   children: [
+      //     {
+      //       path: '/template/search',
+      //       name: 'template.search',
+      //       redirect: '/template/search/basic',
+      //       component: RouteView,
+      //       meta: { title: 'menu.template.search', icon: 'table', permission: ['table'] },
+      //       children: [
+      //         {
+      //           path: '/template/search/basic',
+      //           name: 'template.search.basic',
+      //           // 异步组件参考 https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6
+      //           component: () => import(/* webpackChunkName: "templates" */ '@/templates/Search'),
+      //           props: require('@/modules/templates/search/basic'),
+      //           meta: { title: 'menu.template.search.basic', keepAlive: true, permission: ['table'] },
+      //         },
+      //       ],
+      //     },
+      //     {
+      //       path: '/template/form',
+      //       name: 'template.form',
+      //       redirect: '/template/form/basic',
+      //       component: RouteView,
+      //       meta: { title: 'menu.template.form', icon: 'table', permission: ['table'] },
+      //       children: [
+      //         {
+      //           path: '/template/form/basic',
+      //           name: 'template.form.basic',
+      //           // 异步组件参考 https://cn.vuejs.org/v2/guide/components-dynamic-async.html#%E5%BC%82%E6%AD%A5%E7%BB%84%E4%BB%B6
+      //           component: () => import(/* webpackChunkName: "templates" */ '@/templates/Create'),
+      //           props: require('@/modules/templates/form/basic'),
+      //           meta: { title: 'menu.template.form.basic', keepAlive: true, permission: ['table'] },
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
       // Exception
       {
         path: '/exception',
@@ -309,6 +309,7 @@ export const constantRouterMap = [
   {
     path: '/host',
     name: 'host',
+    meta: { keepAlive: true },
     component: () => import('@/views/host/index'),
     children: [
       {
@@ -320,11 +321,13 @@ export const constantRouterMap = [
       {
         path: 'classification',
         name: 'host.classification',
+        meta: { keepAlive: true },
         component: () => import('@/views/classification/tree'),
       },
       {
         path: 'calendar',
         name: 'host.calendar',
+        meta: { keepAlive: true },
         component: () => import('@/views/host/Calendar'),
       },
       // account
@@ -347,7 +350,15 @@ export const constantRouterMap = [
       {
         path: 'serach/:content',
         name: 'host.search',
+        meta: { keepAlive: true },
         component: () => import('@/views/search/searchResult'),
+      },
+      // poster
+      {
+        path: 'poster/:type',
+        name: 'host.poster',
+        meta: { keepAlive: true },
+        component: () => import('@/views/personal/poster'),
       },
     ],
   },
@@ -371,7 +382,6 @@ export const constantRouterMap = [
           path: 'poster/:type',
           name: 'personal.poster',
           component: () => import('@/views/personal/poster'),
-          meta: { keepAlive: true },
         },
         {
           path: 'classification',

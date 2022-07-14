@@ -9,6 +9,17 @@
                 <a-avatar src="https://joeschmoe.io/api/v1/random" />
               </template>
             </a-card-meta>
+            <div class="cardDiv">
+              <div>
+                产品
+                <a-icon type="project" />
+                <p>{{ treeInfo.product_counts }}</p>
+              </div>
+              <div>
+                浏览<a-icon type="fire" />
+                <p>{{ treeInfo.view_counts }}</p>
+              </div>
+            </div>
           </a-card>
         </template>
       </a-menu>
@@ -16,15 +27,68 @@
     <a-layout style="padding: 0 24px 24px">
       <a-breadcrumb style="margin: 16px 0">
         <a-breadcrumb-item>分类</a-breadcrumb-item>
+        <a-breadcrumb-item v-show="child === 1">
+          <a @click="back">{{ selected }}</a>
+        </a-breadcrumb-item>
       </a-breadcrumb>
       <a-layout-content :style="{ background: '#fff', margin: '10px' }">
         <div style="background-color: #ececec">
-          <a-row :gutter="24">
-            <a-col :span="6" v-for="(item, index) in titleList" :key="index" :style="{ marginTop: '10px' }">
-              <a-card :title="item" :bordered="false" :headStyle="hstyle">
-                <p>浏览量：164</p>
-                <p>打赏：23</p>
-              </a-card>
+          <a-row :gutter="2" v-show="child === 0">
+            <a-col
+              span="6"
+              v-for="(item, index) in systemTree.treeType"
+              :key="index"
+              :style="{ maxHeight: '174px', maxWidth: '182px' }"
+            >
+              <div class="container">
+                <a-card
+                  hoverable
+                  :title="item.name + '(' + item.value + ')'"
+                  :bordered="false"
+                  :style="{ margin: '10px 8px', maxWidth: '170px' }"
+                  @click="toChildTree(index, item.name)"
+                >
+                  <div class="cardDiv">
+                    <div>
+                      <a-icon type="eye" />
+                      <p>{{ item.views_count }}</p>
+                    </div>
+                    <div>
+                      <a-icon type="money-collect" />
+                      <p>{{ item.prize_pool }}</p>
+                    </div>
+                  </div>
+                </a-card>
+              </div>
+            </a-col>
+          </a-row>
+          <a-row :gutter="2" v-show="child === 1">
+            <a-col
+              span="6"
+              v-for="(item, index) in childTree"
+              :key="index"
+              :style="{ maxHeight: '174px', maxWidth: '182px' }"
+            >
+              <div class="container">
+                <a-card
+                  hoverable
+                  :title="item.name + '(' + item.value + ')'"
+                  :bordered="false"
+                  :style="{ margin: '10px 8px', maxWidth: '170px' }"
+                  @click="toPoster(item.type_id)"
+                >
+                  <div class="cardDiv">
+                    <div>
+                      <a-icon type="eye" />
+                      <p>{{ item.views_count }}</p>
+                    </div>
+                    <div>
+                      <a-icon type="money-collect" />
+                      <p>{{ item.prize_pool }}</p>
+                    </div>
+                  </div>
+                </a-card>
+              </div>
             </a-col>
           </a-row>
         </div>
@@ -33,25 +97,41 @@
   </a-layout>
 </template>
 <script>
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons-vue'
 import { defineComponent, ref } from 'vue'
+import { getTypeTree } from '@/services/xhr/demo'
 export default defineComponent({
-  components: {
-    UserOutlined,
-    LaptopOutlined,
-    NotificationOutlined,
-  },
-
-  setup() {
-    const titleList = ref(['操作系统', '中间件', '数据库', '安全软件', '安全软件'])
+  components: {},
+  data() {
     return {
-      hstyle: { height: '200px', 'text-align': 'center' },
+      child: 0,
+      systemTree: {},
+      treeInfo: {},
+      childTree: [],
+      selected: '',
       selectedKeys1: ref(['2']),
       selectedKeys2: ref(['1']),
-      collapsed: ref(false),
-      openKeys: ref(['sub1']),
-      titleList,
     }
+  },
+  async created() {
+    ;[this.systemTree] = await getTypeTree({ tree_id: '' })
+    this.treeInfo = this.systemTree.treeInfo[0]
+  },
+  methods: {
+    toPoster(type) {
+      this.$router.push({
+        // path: '/personal/introduction',
+        name: 'host.poster',
+        params: { type: type },
+      })
+    },
+    back() {
+      this.child = 0
+    },
+    toChildTree(index, name) {
+      this.child = 1
+      this.childTree = this.systemTree.treeType[index].children
+      this.selected = name
+    },
   },
 })
 </script>
@@ -72,17 +152,14 @@ export default defineComponent({
 .site-layout-background {
   background: #fff;
 }
-.content {
-  width: 300px;
-  height: 200px;
-  background: pink; /* 针对不支持渐变的浏览器 */
-  background: -webkit-linear-gradient(180deg, #dc1010, #90ed5a, #2f57e8);
-  /*  Safari 5.1 到 6.0 */
-  background: -o-linear-gradient(180deg, #dc1010, #90ed5a, #2f57e8);
-  /*  Opera 11.6 到 12.0 */
-  background: -moz-linear-gradient(180deg, #dc1010, #90ed5a, #2f57e8);
-  /*  Fx 3.6 到 15 */
-  background: linear-gradient(180deg, #dc1010, #90ed5a, #2f57e8);
-  /* 标准语法（必须是最后一个） */
+.container {
+  /* display: flex; */
+  align-items: center;
+  max-width: 170px;
+}
+.cardDiv {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
 }
 </style>

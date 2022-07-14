@@ -19,7 +19,7 @@
 
         <a-menu-item key="2" @click="toClassification"> 分类 </a-menu-item>
         <a-menu-item key="3" @click="toCalendar">日历事件</a-menu-item>
-        <a-menu-item key="4" @click="toUserCenter">个人中心</a-menu-item>
+        <a-menu-item key="4" @click="toUserCenter"> <a-icon type="user" /> 个人中心</a-menu-item>
       </a-menu>
     </a-layout-header>
     <a-layout-content :style="{ padding: '0 50px', marginTop: '64px' }">

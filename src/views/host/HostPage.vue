@@ -110,8 +110,8 @@
                 </template> -->
                 <template class="ant-card-actions" #actions>
                   <div>
-                    <div>产品：{{ item.product_counts }}</div>
-                    <div>浏览：{{ item.view_counts }}</div>
+                    <div>产品：{{ item.product_counts }}<a-icon type="project" /></div>
+                    <div>浏览：{{ item.view_counts }}<a-icon type="fire" /></div>
                   </div>
                 </template>
                 <a-card-meta :title="item.user_name" :description="item.type_name">
@@ -134,19 +134,6 @@ import { defineComponent } from 'vue'
 import { LeftCircleOutlined } from '@ant-design/icons-vue'
 import { Carousel, Calendar } from 'ant-design-vue'
 import { getAllTypeTree, getCalendar, getLogo, getProductDailyRecommends } from '@/services/xhr/demo'
-// const activityEvents = {
-//   day: [6, 2, 21, 8, 30, 19, 29],
-//   month: [6, 6, 6, 6, 5, 7, 5],
-//   titile: [
-//     '大会-武汉站',
-//     'CIO成长计划--数字化转型能力进阶',
-//     '数字化时代 ToB企业的增长思维',
-//     '	葡萄城低代码和 BI 产品新版发布会',
-//     '联想智慧办公发布会',
-//     'EDIA2022企业数智应用大会暨第七届SaaS应用大会',
-//     'Tapdata LDP 产品发布暨开源说明会',
-//   ],
-// }
 export default defineComponent({
   data() {
     return {

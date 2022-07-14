@@ -19,7 +19,7 @@
           >
             <a-card :title="item.name" :bordered="false" @click="toChildTree(index, item.name)" hoverable>
               <p>浏览量：<a-icon type="eye"></a-icon> {{ item.views_count }}</p>
-              <p>打赏：<a-icon type="gift"></a-icon>{{ item.prize_pool }}</p>
+              <p>打赏：<a-icon type="money-collect"></a-icon>{{ item.prize_pool }}</p>
             </a-card>
           </a-col>
         </a-row>
@@ -32,7 +32,7 @@
           >
             <a-card :title="item.name" :bordered="false" @click="toPoster(item.type_id)" hoverable>
               <p>浏览量：<a-icon type="eye"></a-icon> {{ item.views_count }}</p>
-              <p>打赏：<a-icon type="gift"></a-icon>{{ item.prize_pool }}</p>
+              <p>打赏：<a-icon type="money-collect"></a-icon>{{ item.prize_pool }}</p>
             </a-card>
           </a-col>
         </a-row>
