@@ -21,6 +21,9 @@
                   <a-row :gutter="10">
                     <a-col :span="20">
                       <a-statistic title="产品" :value="product_counts" style="margin-right: 50px"> </a-statistic>
+                      <template #suffix>
+                        <span><a-icon type="project" /></span>
+                      </template>
                     </a-col>
                     <a-col :span="20">
                       <a-statistic title="浏览" :value="view_counts" class="demo-class">
@@ -63,7 +66,7 @@
                           <a-col :span="8">
                             <a-statistic title="评论数" :value="item.comment_num" class="demo-class">
                               <template #suffix>
-                                <span><a-icon type="comment" /></span>
+                                <span><a-icon type="message" /></span>
                               </template>
                             </a-statistic>
                           </a-col>

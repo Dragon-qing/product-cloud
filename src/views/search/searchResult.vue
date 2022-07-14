@@ -36,6 +36,7 @@
               </a-card>
             </a-card>
           </div>
+          <Pagination :default-current="pageNum" :total="searchData.total" @change="onChangePage" v-model="pageNum" />
         </a-layout-content>
       </a-layout>
     </a-layout-content>
@@ -43,8 +44,9 @@
 </template>
 <script>
 import { getSearchByKeyword, getLabelNames } from '@/services/xhr/demo'
+import { Pagination } from 'ant-design-vue'
 export default {
-  components: {},
+  components: { Pagination },
   async created() {
     this.search()
     this.updataLabels(this.content)
@@ -60,6 +62,9 @@ export default {
     },
   },
   methods: {
+    onChangePage() {
+      this.search()
+    },
     checkLabel(data) {
       if (this.labelNum.includes(data)) {
         this.labelNum = this.labelNum.filter((num) => num !== data)

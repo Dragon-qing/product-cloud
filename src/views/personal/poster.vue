@@ -26,6 +26,17 @@ export default {
         params: { id: data },
       })
     },
+    async update() {
+      this.posterData = await getSearchByType({ type: this.$route.params.type })
+    },
+  },
+  watch: {
+    '$route.params.type': {
+      immediate: true,
+      handler() {
+        this.update()
+      },
+    },
   },
   data() {
     return {
@@ -33,7 +44,7 @@ export default {
     }
   },
   async created() {
-    this.posterData = await getSearchByType({ type: this.$route.params.type })
+    this.update()
   },
 }
 </script>
